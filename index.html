@@ -1,0 +1,821 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="رزومه پارسا گلپایگانی" />
+  <title>پارسا گلپایگانی</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #2a5a7c;
+      --secondary: #4b8a8b;
+      --accent: #f1b24a;
+      --light: #ffffff;
+      --dark: #1d3c4a;
+      --gray: #7d8fa1;
+      --light-bg: #f8f9fa;
+      --card-bg: #f0f7f9;
+      
+      --font-xs: clamp(0.65rem, 0.5rem + 0.5vw, 0.8rem);
+      --font-sm: clamp(0.75rem, 0.6rem + 0.5vw, 0.9rem);
+      --font-base: clamp(0.85rem, 0.7rem + 0.5vw, 1rem);
+      --font-lg: clamp(0.95rem, 0.8rem + 0.5vw, 1.1rem);
+      --font-xl: clamp(1.05rem, 0.9rem + 0.5vw, 1.2rem);
+      --font-2xl: clamp(1.15rem, 1rem + 0.5vw, 1.3rem);
+      --font-3xl: clamp(1.3rem, 1.1rem + 0.7vw, 1.5rem);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      font-size: 16px;
+    }
+    
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background-color: var(--light-bg);
+      color: #000000;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-top: clamp(45px, 7vw, 60px);
+      background: linear-gradient(135deg, #e6f7ff 0%, #f0f7f9 100%);
+      font-size: var(--font-base);
+    }
+    
+    .container {
+      max-width: min(1000px, 95%);
+      margin: 0 auto;
+      padding: clamp(4px, 0.8vw, 8px) clamp(10px, 1.5vw, 15px);
+    }
+    
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--dark);
+      padding: clamp(4px, 0.7vw, 7px) 0;
+      z-index: 1000;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+      max-width: min(1000px, 95%);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 clamp(10px, 1.5vw, 15px);
+    }
+    
+    .logo {
+      font-size: var(--font-base);
+      font-weight: 700;
+      color: var(--light);
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo i {
+      margin-left: clamp(5px, 1vw, 8px);
+      color: var(--accent);
+      font-size: var(--font-lg);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: clamp(3px, 0.6vw, 6px);
+    }
+    
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: var(--font-sm);
+      font-weight: 500;
+      padding: clamp(2px, 0.4vw, 4px) clamp(5px, 0.8vw, 8px);
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    
+    .nav-links a.active {
+      background: var(--accent);
+      color: var(--dark);
+    }
+    
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: var(--font-lg);
+      cursor: pointer;
+      padding: 3px;
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(85%, 280px);
+      height: 100vh;
+      background: var(--dark);
+      z-index: 1100;
+      transition: all 0.3s ease;
+      box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .mobile-menu.show {
+      right: 0;
+    }
+    
+    .mobile-menu-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(8px, 1.5vw, 12px);
+      background: var(--primary);
+      color: white;
+      font-size: var(--font-base);
+      font-weight: 600;
+      position: relative;
+    }
+    
+    .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: var(--font-lg);
+      cursor: pointer;
+      position: absolute;
+      left: clamp(10px, 2vw, 15px);
+    }
+    
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      padding: clamp(8px, 1.5vw, 12px);
+      overflow-y: auto;
+      flex-grow: 1;
+      align-items: center;
+    }
+    
+    .mobile-menu-links a {
+      color: white;
+      text-decoration: none;
+      padding: clamp(6px, 1vw, 10px) clamp(6px, 1vw, 10px);
+      margin-bottom: 6px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-base);
+      width: 100%;
+      text-align: center;
+    }
+    
+    .mobile-menu-links a:hover,
+    .mobile-menu-links a.active {
+      background: var(--accent);
+      color: var(--dark);
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1050;
+      display: none;
+    }
+    
+    .overlay.show {
+      display: block;
+    }
+    
+    header {
+      text-align: center;
+      padding: clamp(10px, 1.8vw, 16px) clamp(10px, 2vw, 15px);
+      margin-bottom: clamp(6px, 1vw, 10px);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      color: white;
+    }
+    
+    header h1 {
+      font-size: var(--font-2xl);
+      margin-bottom: 4px;
+      color: var(--light);
+      line-height: 1.3;
+    }
+    
+    header p {
+      font-size: var(--font-base);
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+    
+    section {
+      background: var(--card-bg);
+      border-radius: 6px;
+      padding: clamp(8px, 1.2vw, 12px) clamp(10px, 1.5vw, 15px);
+      margin-bottom: clamp(6px, 1vw, 10px);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+      scroll-margin-top: clamp(45px, 7vw, 60px);
+      border: 1px solid #ddecee;
+    }
+    
+    h2 {
+      font-size: var(--font-xl);
+      margin-bottom: clamp(6px, 1vw, 10px);
+      color: var(--primary);
+      text-align: center;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--accent);
+      display: inline-block;
+      width: 100%;
+      line-height: 1.3;
+    }
+    
+    .info-item {
+      display: flex;
+      margin-bottom: clamp(4px, 0.6vw, 6px);
+      padding: clamp(6px, 1vw, 10px);
+      background: var(--light);
+      border-radius: 5px;
+      align-items: flex-start;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .info-item i {
+      font-size: var(--font-base);
+      color: var(--accent);
+      min-width: clamp(25px, 4vw, 30px);
+      padding-top: 2px;
+    }
+    
+    .info-text {
+      flex-grow: 1;
+    }
+    
+    .info-text h3 {
+      font-size: var(--font-base);
+      color: #000000;
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    
+    .info-text p {
+      font-size: var(--font-sm);
+      color: #000000;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+    
+    .phone-link {
+      color: #000000;
+      text-decoration: none;
+      font-size: var(--font-sm);
+      font-weight: 400;
+      transition: color 0.2s ease;
+    }
+    
+    .phone-link:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(6px, 1vw, 10px);
+      margin-top: 0;
+    }
+    
+    .skill-item {
+      background: var(--light);
+      padding: clamp(6px, 1vw, 10px) clamp(10px, 1.5vw, 16px);
+      border-radius: 5px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      flex: 0 1 auto;
+      min-width: clamp(100px, 12vw, 150px);
+      max-width: 100%;
+      border: 1px solid #e8f0f2;
+    }
+    
+    .skill-item h5 {
+      font-size: var(--font-sm);
+      color: #000000;
+      line-height: 1.3;
+      font-weight: 600;
+      margin: 0;
+      white-space: nowrap;
+    }
+    
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: clamp(4px, 0.6vw, 6px);
+      margin-top: 0px;
+    }
+    
+    .service {
+      background: var(--light);
+      padding: clamp(6px, 1vw, 10px);
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    
+    .service i {
+      font-size: var(--font-lg);
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: block;
+    }
+    
+    .service h3 {
+      font-size: var(--font-base);
+      color: #000000;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    
+    .service p {
+      color: #000000;
+      line-height: 1.5;
+      font-size: var(--font-sm);
+      margin: 0;
+    }
+    
+    .direct-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(4px, 0.6vw, 6px);
+      justify-content: center;
+      margin-top: 6px;
+    }
+    
+    footer {
+      text-align: center;
+      padding: clamp(8px, 1.2vw, 14px) clamp(10px, 2vw, 15px);
+      margin-top: clamp(4px, 0.6vw, 8px);
+      color: #000000;
+      border-top: 1px solid #ddecee;
+      background: var(--card-bg);
+      border-radius: 6px;
+      font-size: var(--font-sm);
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(32px, 5vw, 38px);
+      height: clamp(32px, 5vw, 38px);
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: var(--font-base);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--accent);
+      color: var(--dark);
+    }
+    
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: clamp(4px, 0.6vw, 6px) clamp(10px, 1.5vw, 14px);
+      background: var(--secondary);
+      border-radius: 3px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: var(--font-sm);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin: 6px auto;
+      white-space: nowrap;
+    }
+    
+    .download-btn i {
+      margin-left: 6px;
+      font-size: var(--font-sm);
+    }
+    
+    #about .info-text {
+      text-align: right;
+      direction: rtl;
+    }
+    
+    #about .info-text p {
+      color: #000000;
+    }
+    
+    #education .info-item,
+    #services .services,
+    #experience .info-item,
+    #contact .info-item {
+      text-align: center;
+    }
+    
+    #education .info-item,
+    #experience .info-item,
+    #contact .info-item {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    #education .info-item i,
+    #experience .info-item i,
+    #contact .info-item i {
+      margin-bottom: 4px;
+    }
+    
+    #about .info-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    #about .info-item i {
+      margin-bottom: 6px;
+      font-size: var(--font-lg);
+      color: var(--accent);
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding-top: clamp(40px, 6vw, 50px);
+      }
+      
+      nav {
+        padding: 3px 0;
+      }
+      
+      .logo {
+        font-size: var(--font-sm);
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hamburger-btn {
+        display: block;
+      }
+      
+      header {
+        padding: clamp(8px, 1.8vw, 14px) clamp(8px, 1.5vw, 12px);
+        margin-bottom: clamp(4px, 0.8vw, 6px);
+      }
+      
+      header h1 {
+        font-size: var(--font-xl);
+      }
+      
+      header p {
+        font-size: var(--font-sm);
+      }
+      
+      section {
+        padding: clamp(6px, 1.2vw, 10px) clamp(6px, 1.2vw, 10px);
+        margin-bottom: clamp(4px, 0.8vw, 6px);
+        scroll-margin-top: clamp(40px, 6vw, 50px);
+      }
+      
+      .info-item {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: clamp(4px, 0.8vw, 8px);
+        margin-bottom: clamp(3px, 0.5vw, 5px);
+      }
+      
+      .info-item i {
+        margin-bottom: 4px;
+      }
+      
+      .services {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      
+      .direct-contact {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .download-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .skills-container {
+        gap: clamp(4px, 0.8vw, 6px);
+      }
+      
+      .skill-item {
+        min-width: clamp(80px, 40%, 120px);
+        flex: 1 1 auto;
+      }
+      
+      .skill-item h5 {
+        white-space: normal;
+        font-size: var(--font-xs);
+      }
+      
+      .mobile-menu {
+        width: min(90%, 260px);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding-top: 38px;
+      }
+      
+      .container {
+        padding: 3px;
+      }
+      
+      header h1 {
+        font-size: var(--font-lg);
+      }
+      
+      header p {
+        font-size: var(--font-xs);
+      }
+      
+      h2 {
+        font-size: var(--font-lg);
+        margin-bottom: 4px;
+      }
+      
+      .info-text h3 {
+        font-size: var(--font-sm);
+      }
+      
+      .info-text p {
+        font-size: var(--font-xs);
+      }
+      
+      .service h3 {
+        font-size: var(--font-sm);
+      }
+      
+      .service p {
+        font-size: var(--font-xs);
+      }
+      
+      footer {
+        padding: 6px 6px;
+        margin-top: 4px;
+      }
+      
+      .skill-item {
+        min-width: clamp(70px, 45%, 100px);
+        padding: clamp(4px, 0.8vw, 6px) clamp(6px, 1vw, 10px);
+      }
+    }
+    
+    @media (min-width: 481px) and (max-width: 768px) {
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .container {
+        max-width: min(900px, 92%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fas fa-calculator"></i>
+        <span>گلپایگانی</span>
+      </div>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="#about" class="active">درباره من</a>
+        <a href="#education">تحصیلات</a>
+        <a href="#skills">مهارت‌ها</a>
+        <a href="#experience">سوابق کاری</a>
+        <a href="#contact">تماس با من</a>
+      </div>
+      
+      <button class="hamburger-btn" id="hamburgerBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <span>منو</span>
+      <button class="close-btn" id="closeBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="mobile-menu-links">
+      <a href="#about" class="active">درباره من</a>
+      <a href="#education">تحصیلات</a>
+      <a href="#skills">مهارت‌ها</a>
+      <a href="#experience">سوابق کاری</a>
+      <a href="#contact">تماس با من</a>
+    </div>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  
+  <div class="container">
+    <header>
+      <h1>پارسا گلپایگانی</h1>
+      <p></p>
+    </header>
+    
+    <main>
+      <section id="about">
+        <h2>درباره من</h2>
+        <div class="info-item">
+          <div class="info-text">
+            <p>دانش آموخته رشته حسابداری با تسلط بر نرم افزار ها و اصول حسابداری هستم که توانایی بالایی در کار تیمی، حل مسئله و انجام دقیق امور مالی و مالیاتی دارم.</p>
+            <p>هدف من به کارگیری دانش آکادمیک و مهارت های عملی در یک محیط پویا و رشد در زمینه حسابداری است و به دنبال فرصتی هستم که بتوانم توانایی های خود را به نمایش گذاشته و در کنار حرفه ای ها تجربه کسب کنم.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section id="education">
+        <h2>تحصیلات</h2>
+        <div class="info-item">
+          <div class="info-text">
+            <h3>تحصیلات رسمی</h3>
+            <p>دیپلم ریاضی دبیرستان رجایی</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-text">
+            <h3>مدارک آکادمیک</h3>
+            <p>مدرک حسابداری ویژه بازار کار مجتمع فنی تهران</p>
+            <p>مدرک حسابداری ویژه بازار کار فنی و حرفه ای</p>
+            <p>دوره ICDL آموزشگاه فنی و حرفه ای کارا</p>
+            <p>دیپلم زبان انگلیسی موسسه نصیر</p>
+          </div>
+        </div>
+      </section>
+      
+      <section id="skills">
+        <h2>مهارت‌ها</h2>
+        <div class="skills-container">
+          <div class="skill-item">
+            <h5>حسابداری دریافت و پرداخت</h5>
+          </div>
+          
+          <div class="skill-item">
+            <h5>حسابداری خرید و فروش</h5>
+          </div>
+          
+          <div class="skill-item">
+            <h5>حسابداری اموال و انبار</h5>
+          </div>
+          
+          <div class="skill-item">
+            <h5>حسابداری حقوق و دستمزد</h5>
+          </div>
+
+          <div class="skill-item">
+            <h5>تهیه و تنظیم صورت‌های مالی</h5>
+          </div>
+          
+          <div class="skill-item">
+            <h5>نرم افزار Excel</h5>
+          </div>
+
+          <div class="skill-item">
+            <h5>نرم افزار هلو</h5>
+          </div>
+
+          <div class="skill-item">
+            <h5>نرم افزار سپیدار</h5>
+          </div>
+        </div>
+      </section>
+      
+      <section id="experience">
+        <h2>سوابق کاری</h2>
+        <div class="info-item">
+          <div class="info-text">
+            <h3>کارآموز حسابداری</h3>
+            <p>مجتمع فنی تهران</p>
+            <p>شهریور ۱۴۰۵ – اسفند ۱۴۰۵</p>
+          </div>
+        </div>
+      </section>
+      
+      <section id="contact">
+        <h2>تماس با من</h2>
+        <div class="info-item">
+          <div class="info-text">
+            <h3>شماره تماس</h3>
+            <p>
+              <a href="tel:+989102903445" class="phone-link">
+                ۰۹۱۰۲۹۰۳۴۴۵
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const closeBtn = document.getElementById('closeBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('overlay');
+      const navItems = document.querySelectorAll('.nav-links a, .mobile-menu-links a');
+      
+      hamburgerBtn.addEventListener('click', function() {
+        mobileMenu.classList.add('show');
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+      
+      closeBtn.addEventListener('click', closeMobileMenu);
+      overlay.addEventListener('click', closeMobileMenu);
+      
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+      
+      navItems.forEach(link => {
+        link.addEventListener('click', function(e) {
+          navItems.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+          
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            e.preventDefault();
+            closeMobileMenu();
+            
+            setTimeout(() => {
+              window.scrollTo({
+                top: targetSection.offsetTop - 60,
+                behavior: 'smooth'
+              });
+            }, 300);
+          }
+        });
+      });
+      
+      window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const offset = 80;
+          
+          if (pageYOffset >= (sectionTop - offset)) {
+            current = section.getAttribute('id');
+          }
+        });
+     
